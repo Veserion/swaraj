@@ -33,7 +33,7 @@ class AddForm extends React.Component<IProps, IState> {
                     Open Modal
                 </Button>
                 <Modal
-                    title="Basic Modal"
+                    title="New drop"
                     visible={this.state.visible}
                     onCancel={this.handleCancel}
                     footer={null}
