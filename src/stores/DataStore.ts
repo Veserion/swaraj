@@ -3,7 +3,7 @@ import { SubStore } from "./SubStore";
 import { database } from "../utils/firebase";
 import { action, observable } from "mobx";
 
-type TWearable = {
+type IWearable = {
   id: string;
   article: string;
   quantityIssued: number;
@@ -15,7 +15,7 @@ type TWearable = {
 };
 
 export class DataStore extends SubStore {
-  @observable drops: Record<string, Record<string, TWearable>> = {};
+  @observable drops: Record<string, Record<string, IWearable>> = {};
 
   constructor(rootStore: RootStore, initState: any) {
     super(rootStore);
@@ -32,13 +32,13 @@ export class DataStore extends SubStore {
       });
   };
 
-  addItem = async (drop: TWearable) =>
+  addItem = async (drop: IWearable) =>
     new Promise(async (resolve) => {
       database.ref("/").push(drop, (error) => resolve(error));
       await this.syncGoods();
     });
 
-  updateItem = async (id: string, drop: TWearable) =>
+  updateItem = async (id: string, drop: IWearable) =>
     new Promise(async (resolve) => {
       database.ref(`/${id}`).update(drop, (error) => resolve(error));
       await this.syncGoods();
