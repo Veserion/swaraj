@@ -4,6 +4,7 @@ import { database } from "../utils/firebase";
 import { action, observable } from "mobx";
 
 type TWearable = {
+  id: string;
   article: string;
   quantityIssued: number;
   materials: string;

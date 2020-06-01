@@ -8,8 +8,8 @@ export default class SwitchScreen extends React.Component {
     }
     render() {
         return <Root>
-            <Drops></Drops>
-            <PushDrop></PushDrop>
+            <Drops>Drops Base</Drops>
+            <PushDrop>Push Drop</PushDrop>
         </Root>
     }
 }
