@@ -103,6 +103,6 @@ justify-content: center;
 align-items: center;
 .ant-form {
     width: 50%;
-    margin-right: 10%;
+    margin-right: 15%;
 }
 `
