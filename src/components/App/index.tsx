@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled'
 import {Button, List, Modal} from "antd";
 import AddForm from "../AddForm";
+import SizedBox from "../SizedBox";
 
 interface IProps {
 
@@ -16,8 +17,11 @@ class App extends React.Component<IProps, IState> {
 
     render() {
         return <Root>
-            <List/>
+            <SizedBox height={64}/>
             <AddForm/>
+            <SizedBox height={32}/>
+            <List/>
+            <SizedBox height={64}/>
         </Root>
     }
 
@@ -26,11 +30,11 @@ class App extends React.Component<IProps, IState> {
 
 const Root = styled.div`
 display: flex;
-align-items: center;
-justify-content: center;
 flex-direction: column;
+align-items: center;
 height: 100vh;
 width: 100vw;
 `
+
 
 export default App;

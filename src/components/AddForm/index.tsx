@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled'
 import {Button,  Modal} from "antd";
 import FormBody from "./FormBody";
+import {FormInstance} from "antd/lib/form";
 
 interface IProps {
 
@@ -12,16 +13,11 @@ interface IState {
 }
 
 class AddForm extends React.Component<IProps, IState> {
-    state = {visible: false};
+    state = {visible: true};
+
+    formRef = React.createRef<FormInstance>();
 
     showModal = () => this.setState({visible: true});
-
-    handleOk = (e: any) => {
-        console.log(e);
-        this.setState({
-            visible: false
-        });
-    };
 
     handleCancel = (e: any) => {
         console.log(e);
@@ -39,10 +35,10 @@ class AddForm extends React.Component<IProps, IState> {
                 <Modal
                     title="Basic Modal"
                     visible={this.state.visible}
-                    onOk={this.handleOk}
                     onCancel={this.handleCancel}
+                    footer={null}
                 >
-                    <FormBody/>
+                    <FormBody formRef={this.formRef}/>
                 </Modal>
             </div>
 
@@ -58,8 +54,6 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-height: 100vh;
-width: 100vw;
 `
 
 export default AddForm;

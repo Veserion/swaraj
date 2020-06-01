@@ -11,35 +11,26 @@ const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 };
 
+const Root = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+.ant-form {
+    width: 98%;
+    margin-right: 15%;
+}
+`
 
-export default class FormBody extends React.Component {
-    formRef = React.createRef<FormInstance>();
-
-    onGenderChange = (value: any) => {
-        this.formRef.current!.setFieldsValue({
-            note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-        });
-    };
+export default class FormBody extends React.Component<{formRef:  React.RefObject<FormInstance>}> {
 
     onFinish = (values: any) => {
 
     };
 
-    onReset = () => {
-        this.formRef.current!.resetFields();
-    };
-
-    onFill = () => {
-        this.formRef.current!.setFieldsValue({
-            note: 'Hello world!',
-            gender: 'male',
-        });
-    };
-
     render() {
         return (
             <Root>
-                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+                <Form {...layout} ref={this.props.formRef} name="control-ref" onFinish={this.onFinish}>
                     <Form.Item name="article" label="Article" rules={[{required: true}]}>
                         <Input/>
                     </Form.Item>
@@ -78,14 +69,8 @@ export default class FormBody extends React.Component {
                         }}
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit">
+                        <Button style={{width: '100%'}} type="primary" htmlType="submit">
                             Submit
-                        </Button>
-                        <Button htmlType="button" onClick={this.onReset}>
-                            Reset
-                        </Button>
-                        <Button type="link" htmlType="button" onClick={this.onFill}>
-                            Fill form
                         </Button>
                     </Form.Item>
                 </Form>
@@ -94,14 +79,3 @@ export default class FormBody extends React.Component {
     }
 }
 
-const Root = styled.div`
-display: flex;
-width: 100vw;
-height: 100vh;
-justify-content: center;
-align-items: center;
-.ant-form {
-    width: 50%;
-    margin-right: 15%;
-}
-`
