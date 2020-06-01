@@ -1,11 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import 'antd/dist/antd.css';
-
-
-const { Option } = Select;
 
 const layout = {
     labelCol: { span: 8 },
@@ -26,7 +23,7 @@ export default class CustomForm extends React.Component {
     };
 
     onFinish = (values: any) => {
-        
+
     };
 
     onReset = () => {
@@ -106,6 +103,6 @@ justify-content: center;
 align-items: center;
 .ant-form {
     width: 50%;
-    margin-right: 15%;
+    margin-right: 10%;
 }
 `
