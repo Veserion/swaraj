@@ -1,19 +1,18 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Form, Input, Button } from 'antd';
-import { FormInstance } from 'antd/lib/form';
-import 'antd/dist/antd.css';
+import {Form, Input, Button} from 'antd';
+import {FormInstance} from 'antd/lib/form';
 
 const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: {span: 8},
+    wrapperCol: {span: 16},
 };
 const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: {offset: 8, span: 16},
 };
 
 
-export default class CustomForm extends React.Component {
+export default class FormBody extends React.Component {
     formRef = React.createRef<FormInstance>();
 
     onGenderChange = (value: any) => {
@@ -41,39 +40,39 @@ export default class CustomForm extends React.Component {
         return (
             <Root>
                 <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
-                    <Form.Item name="article" label="Article" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="article" label="Article" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
-                    <Form.Item name="quantityIssued" label="Quantity issued" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="quantityIssued" label="Quantity issued" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
-                    <Form.Item name="materials" label="Materials" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="materials" label="Materials" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
-                    <Form.Item name="designer" label="Designer" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="designer" label="Designer" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
-                    <Form.Item name="release price" label="Release price" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="release price" label="Release price" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
-                    <Form.Item name="description" label="Description" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="description" label="Description" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
-                    <Form.Item name="picture" label="Picture" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item name="picture" label="Picture" rules={[{required: true}]}>
+                        <Input/>
                     </Form.Item>
                     <Form.Item
                         noStyle
                         shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
                     >
-                        {({ getFieldValue }) => {
+                        {({getFieldValue}) => {
                             return getFieldValue('gender') === 'other' ? (
                                 <Form.Item
                                     name="customizeGender"
                                     label="Customize Gender"
-                                    rules={[{ required: true }]}
+                                    rules={[{required: true}]}
                                 >
-                                    <Input />
+                                    <Input/>
                                 </Form.Item>
                             ) : null;
                         }}
@@ -81,13 +80,13 @@ export default class CustomForm extends React.Component {
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
                             Submit
-          </Button>
+                        </Button>
                         <Button htmlType="button" onClick={this.onReset}>
                             Reset
-          </Button>
+                        </Button>
                         <Button type="link" htmlType="button" onClick={this.onFill}>
                             Fill form
-          </Button>
+                        </Button>
                     </Form.Item>
                 </Form>
             </Root>
