@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import {Form, Input, Button} from 'antd';
 import {FormInstance} from 'antd/lib/form';
+import SizedBox from "../SizedBox";
 
 const layout = {
     labelCol: {span: 8},
@@ -21,16 +22,25 @@ align-items: center;
 }
 `
 
-export default class FormBody extends React.Component<{formRef:  React.RefObject<FormInstance>}> {
+export default class FormBody extends React.Component<{onSubmit: (values: any) => void} > {
+    formRef = React.createRef<FormInstance>();
 
-    onFinish = (values: any) => {
-
+    onFill = () => {
+        this.formRef.current!.setFieldsValue({
+            article: 'test data',
+            quantityIssued: 2,
+            materials: 'test data',
+            designer: 'test data',
+            releasePrice: 1000,
+            description: 'test data',
+            picture: 'test data',
+        });
     };
 
     render() {
         return (
             <Root>
-                <Form {...layout} ref={this.props.formRef} name="control-ref" onFinish={this.onFinish}>
+                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.props.onSubmit}>
                     <Form.Item name="article" label="Article" rules={[{required: true}]}>
                         <Input/>
                     </Form.Item>
@@ -43,7 +53,7 @@ export default class FormBody extends React.Component<{formRef:  React.RefObject
                     <Form.Item name="designer" label="Designer" rules={[{required: true}]}>
                         <Input/>
                     </Form.Item>
-                    <Form.Item name="release price" label="Release price" rules={[{required: true}]}>
+                    <Form.Item name="releasePrice" label="Release price" rules={[{required: true}]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item name="description" label="Description" rules={[{required: true}]}>
@@ -52,25 +62,13 @@ export default class FormBody extends React.Component<{formRef:  React.RefObject
                     <Form.Item name="picture" label="Picture" rules={[{required: true}]}>
                         <Input/>
                     </Form.Item>
-                    <Form.Item
-                        noStyle
-                        shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
-                    >
-                        {({getFieldValue}) => {
-                            return getFieldValue('gender') === 'other' ? (
-                                <Form.Item
-                                    name="customizeGender"
-                                    label="Customize Gender"
-                                    rules={[{required: true}]}
-                                >
-                                    <Input/>
-                                </Form.Item>
-                            ) : null;
-                        }}
-                    </Form.Item>
+
                     <Form.Item {...tailLayout}>
-                        <Button style={{width: '100%'}} type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit">
                             Submit
+                        </Button>
+                        <Button type="link" htmlType="button" onClick={this.onFill}>
+                            Fill form
                         </Button>
                     </Form.Item>
                 </Form>

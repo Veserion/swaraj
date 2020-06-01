@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import {Button,  Modal} from "antd";
+import {Button, Modal} from "antd";
 import FormBody from "./FormBody";
 import {FormInstance} from "antd/lib/form";
+import {values} from "mobx";
 
 interface IProps {
 
@@ -15,16 +16,14 @@ interface IState {
 class AddForm extends React.Component<IProps, IState> {
     state = {visible: true};
 
-    formRef = React.createRef<FormInstance>();
-
     showModal = () => this.setState({visible: true});
 
-    handleCancel = (e: any) => {
-        console.log(e);
-        this.setState({
-            visible: false,
-        });
-    };
+    handleCancel = () => this.setState({visible: false});
+
+    handleSubmit = (values: any) => {
+        console.log(values);
+
+    }
 
     render() {
         return <Root>
@@ -38,7 +37,7 @@ class AddForm extends React.Component<IProps, IState> {
                     onCancel={this.handleCancel}
                     footer={null}
                 >
-                    <FormBody formRef={this.formRef}/>
+                    <FormBody onSubmit={this.handleSubmit}/>
                 </Modal>
             </div>
 
@@ -46,7 +45,6 @@ class AddForm extends React.Component<IProps, IState> {
     }
 
 }
-
 
 
 const Root = styled.div`
