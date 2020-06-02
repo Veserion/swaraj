@@ -1,24 +1,29 @@
+/**jsx*/
 import React from 'react';
 import styled from '@emotion/styled'
-import {Button, Modal} from "antd";
+import { css, jsx } from '@emotion/core'
+import { Button, Modal } from "antd";
 import FormBody from "./FormBody";
-import {FormInstance} from "antd/lib/form";
-import {values} from "mobx";
+// import {FormInstance} from "antd/lib/form";
+// import {values} from "mobx";
+import { inject, observer } from 'mobx-react';
+import { SwitchScreenStore } from '../../stores'
 
 interface IProps {
-
+    switchScreenStore?: SwitchScreenStore
 }
 
 interface IState {
     visible: boolean
 }
-
+@inject('switchScreenStore')
+@observer
 class AddForm extends React.Component<IProps, IState> {
-    state = {visible: true};
+    state = { visible: false };
 
-    showModal = () => this.setState({visible: true});
+    showModal = () => this.setState({ visible: true });
 
-    handleCancel = () => this.setState({visible: false});
+    handleCancel = () => this.setState({ visible: false });
 
     handleSubmit = (values: any) => {
         console.log(values);
@@ -26,7 +31,11 @@ class AddForm extends React.Component<IProps, IState> {
     }
 
     render() {
-        return <Root>
+        return <Root css={this.props.switchScreenStore!.openScreen === 'Drops'
+            ? css`
+                display: none;`
+            : css``
+        }>
             <div>
                 <Button type="primary" onClick={this.showModal}>
                     Open Modal
@@ -37,7 +46,7 @@ class AddForm extends React.Component<IProps, IState> {
                     onCancel={this.handleCancel}
                     footer={null}
                 >
-                    <FormBody onSubmit={this.handleSubmit}/>
+                    <FormBody onSubmit={this.handleSubmit} />
                 </Modal>
             </div>
 

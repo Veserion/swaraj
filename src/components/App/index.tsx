@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import {Button, List, Modal} from "antd";
 import AddForm from "../AddForm";
 import SizedBox from "../SizedBox";
+import SwitchScreen from '../SwitchScreen'
 
 interface IProps {
 
@@ -17,6 +18,7 @@ class App extends React.Component<IProps, IState> {
 
     render() {
         return <Root>
+            <SwitchScreen/>
             <SizedBox height={64}/>
             <AddForm/>
             <SizedBox height={32}/>
