@@ -19,28 +19,22 @@ export class CurrentDropsStore extends SubStore {
         JSON.parse(localStorage.getItem("currentDrops")!) || [];
 
     autoUpdate = autorun(() => {
-        localStorage.setItem("basket", JSON.stringify(this.currentDrops));
+        localStorage.setItem("currenDrops", JSON.stringify(this.currentDrops));
     });
 
-    @action increaseItem = (id: string, wear: IWear) => {
-        this.currentDrops.filter((item) => item.id === id).length === 0
-            ? this.currentDrops.push({id: id, count: count})
-            : this.currentDrops.map((item) => {
-                if (item.id === id) item.count += count;
-            });
-    };
-
-    @action decreaseItem = (id: string, count: number = 1) => {
-        if (this.basketItems.filter((item) => item.id === id).length !== 0) {
-            this.basketItems.map((item) => {
-                if (item.id === id) item.count -= count;
-                if (item.count <= 0) item.count = 0;
-            });
+    @action addWear = (id: string, wear: IWear) => {
+        if (this.currentDrops.filter((item) => item.id === id).length === 0) {
+          this.currentDrops.push({ id, ...wear });
         }
     };
 
-    @action deleteItem = (id: string) => {
-        const index = this.basketItems.findIndex((item) => item.id === id);
-        this.basketItems.splice(index, 1);
+    @action updateWear = (id: string, wear: IWear) => {
+        const index = this.currentDrops.findIndex((item) => item.id === id)
+        this.currentDrops[index] = {id, ...wear}
+    };
+
+    @action deleteWear = (id: string) => {
+        const index = this.currentDrops.findIndex((item) => item.id === id);
+        this.currentDrops.splice(index, 1);
     };
 }
