@@ -7,5 +7,6 @@ export class SwitchScreenStore extends SubStore {
 
     @action setScreen = (typeOfScreen: string) => {
         this.openScreen = typeOfScreen
+        console.log(typeOfScreen)
     }
 }

@@ -10,12 +10,11 @@ import 'antd/dist/antd.css';
 const initState = loadState();
 const mobXStore = new RootStore(initState);
 
-
 autorun(() => {
-    console.dir(mobXStore);
-    saveState(mobXStore.serialize());
+  console.dir(mobXStore);
+  saveState(mobXStore.serialize());
 }, { delay: 1000 });
 
 ReactDOM.render(<Provider {...mobXStore}>
-    <App/>
-    </Provider>, document.getElementById('root'));
+  <App />
+</Provider>, document.getElementById('root'));

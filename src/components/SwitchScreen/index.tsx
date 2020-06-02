@@ -45,10 +45,12 @@ const Drops = styled.div`
 padding: 7px 15px;
 border: 1px solid #807F80;
 border-radius: 2px;
+cursor: pointer;
 `
 const PushDrop = styled.div`
 margin-left: 20px;
 padding: 7px 15px;
 border: 1px solid #807F80;
 border-radius: 2px;
+cursor: pointer;
 `
