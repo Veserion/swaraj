@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { Button, Modal } from "antd";
 import FormBody from "./FormBody";
+import TableCurrentDrop from "./TableCurrentDrop"
 // import {FormInstance} from "antd/lib/form";
 // import {values} from "mobx";
 import { inject, observer } from 'mobx-react';
@@ -16,9 +17,11 @@ interface IProps {
 interface IState {
     visible: boolean
 }
+
+
 @inject('switchScreenStore')
 @observer
-class AddForm extends React.Component<IProps, IState> {
+export default class CurrentDrop extends React.Component<IProps, IState> {
     state = { visible: false };
 
     showModal = () => this.setState({ visible: true });
@@ -31,25 +34,17 @@ class AddForm extends React.Component<IProps, IState> {
     }
 
     render() {
-        return <Root css={this.props.switchScreenStore!.openScreen === 'Drops'
-            ? css`
-                display: none;`
-            : css``
-        }>
-            <div>
-                <Button type="primary" onClick={this.showModal}>
-                    Open Modal
-                </Button>
-                <Modal
-                    title="New drop"
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    footer={null}
-                >
-                    <FormBody onSubmit={this.handleSubmit} />
-                </Modal>
-            </div>
+        let classHidden = ''
+        if (this.props.switchScreenStore!.openScreen === 'CurrentDrop') {
+            classHidden = 'hidden'
+        }
 
+        return <Root>
+            <Wrapper className={classHidden}>
+                {console.log(this.props.switchScreenStore!.openScreen)}
+                <TableCurrentDrop css={css`flex: 1;`} />
+                <FormBody css={css`flex: 1;`} />
+            </Wrapper>
         </Root>
     }
 
@@ -57,10 +52,17 @@ class AddForm extends React.Component<IProps, IState> {
 
 
 const Root = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+width: 100%;
+margin-top: 120px;
+margin-left: 100px;
+.hidden {
+    display: none;
+}
 `
 
-export default AddForm;
+const Wrapper = styled.div`
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: flex-start;
+`

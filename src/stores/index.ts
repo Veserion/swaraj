@@ -1,6 +1,6 @@
 import { DataStore } from "./DataStore";
 import { RootStore } from "./RootStore";
-import { CurrentDropsStore } from "./CurrentDropsStore";
+import { CurrentDropStore } from "./CurrentDropStore";
 import { SwitchScreenStore } from "./SwitchScreenStore";
 
-export { DataStore, RootStore, CurrentDropsStore, SwitchScreenStore };
+export { DataStore, RootStore, CurrentDropStore, SwitchScreenStore };
