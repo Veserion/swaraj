@@ -13,14 +13,13 @@ export interface IWearable {
   description: string;
   picture: string;
 }
-// interface IWear extends Omit<IWearable, "id"> {}
 
 export class CurrentDropStore extends SubStore {
-  @observable currentDrop: Array<IWearable> =
-    JSON.parse(localStorage.getItem("currentDrops")!) || [];
+  @observable currentDrop: IWearable[] =
+    JSON.parse(localStorage.getItem("currentDrop")!) || [];
 
   autoUpdate = autorun(() => {
-    localStorage.setItem("currenDrops", JSON.stringify(this.currentDrop));
+    localStorage.setItem("currentDrop", JSON.stringify(this.currentDrop));
   });
 
   @action addWear = (wear: IWearable) => {

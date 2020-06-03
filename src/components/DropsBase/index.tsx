@@ -1,9 +1,7 @@
 /**jsx*/
-import React from 'react';
+import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import FormBody from "./FormBody";
-import TableCurrentDrop from "./TableCurrentDrop"
 import { inject, observer } from 'mobx-react';
 import { SwitchScreenStore } from '../../stores'
 
@@ -13,31 +11,20 @@ interface IProps {
 
 @inject('switchScreenStore')
 @observer
-export default class CurrentDrop extends React.Component<IProps> {
-    // handleCancel = () => this.setState({ visible: false });
-
-    handleSubmit = (values: any) => {
-        console.log(values);
-
-    }
-
+export default class DropsBase extends React.Component<IProps> {
     render() {
+
         let classHidden = ''
-        if (this.props.switchScreenStore!.openScreen !== 'CurrentDrop') {
+        if (this.props.switchScreenStore!.openScreen !== 'Drops') {
             classHidden = 'hidden'
         }
-
         return <Root>
             <Wrapper className={classHidden}>
-                {console.log(this.props.switchScreenStore!.openScreen)}
-                <TableCurrentDrop css={css`flex: 1;`} />
-                <FormBody css={css`flex: 1;`} />
+                
             </Wrapper>
         </Root>
     }
-
 }
-
 
 const Root = styled.div`
 width: 100%;

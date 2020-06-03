@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Form, Input, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import SizedBox from "../SizedBox";
+// import SizedBox from "../SizedBox";
 import { inject, observer } from 'mobx-react'
 import { CurrentDropStore, IWearable } from '../../stores/CurrentDropStore'
 
@@ -42,7 +42,7 @@ export default class FormBody extends React.Component<IProps> {
             quantityIssued: 2,
             materials: 'test data',
             designer: 'test data',
-            releasePrice: 1000,
+            price: 1000,
             description: 'test data',
             picture: 'test data',
         });
@@ -53,11 +53,10 @@ export default class FormBody extends React.Component<IProps> {
     }
 
     render() {
-        const index = this.props.currentDropStore?.currentDrop.length || 0
         return (
             <Root>
                 <Form {...layout} ref={this.formRef} name="control-ref"
-                    onFinish={values => this.onSubmit({ ...values, id: index.toString() } as IWearable)}>
+                    onFinish={values => this.onSubmit({ ...values, id: generId(values as IWearable).toString() } as IWearable)}>
                     <Form.Item name="article" label="Article" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
@@ -70,7 +69,7 @@ export default class FormBody extends React.Component<IProps> {
                     <Form.Item name="designer" label="Designer" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name="releasePrice" label="Release price" rules={[{ required: true }]}>
+                    <Form.Item name="price" label="Release price" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item name="description" label="Description" rules={[{ required: true }]}>
@@ -94,3 +93,7 @@ export default class FormBody extends React.Component<IProps> {
     }
 }
 
+const generId = (wear: IWearable) => {
+    console.log(wear.quantityIssued, wear.price, wear.article.length, wear.description.length)
+    return Math.ceil(wear.quantityIssued * wear.price * wear.article.length + wear.description.length)
+}
