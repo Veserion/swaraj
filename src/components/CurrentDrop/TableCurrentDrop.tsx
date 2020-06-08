@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Table, Button, Space } from 'antd'
+import { Table, Space } from 'antd'
 import { CurrentDropStore, IWearable } from '../../stores/CurrentDropStore'
 import { inject, observer } from 'mobx-react'
 import { DataStore } from '../../stores/DataStore'
 import { FormInstance } from 'antd/lib/form'
-// import { access } from 'fs'
-// import { values } from 'mobx'
 
 interface IProps {
     currentDropStore?: CurrentDropStore

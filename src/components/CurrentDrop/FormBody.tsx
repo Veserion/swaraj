@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Form, Input, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-// import SizedBox from "../SizedBox";
 import { inject, observer } from 'mobx-react'
 import { CurrentDropStore, IWearable } from '../../stores/CurrentDropStore'
 
@@ -95,6 +94,3 @@ export default class FormBody extends React.Component<IProps> {
     }
 }
 
-const generId = () => {
-    return Math.ceil(10000 * Math.random())
-}

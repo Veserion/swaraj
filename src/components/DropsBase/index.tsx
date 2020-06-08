@@ -6,7 +6,6 @@ import { inject, observer } from 'mobx-react';
 import { SwitchScreenStore } from '../../stores'
 import { DataStore } from '../../stores'
 import { Table } from 'antd'
-import { IWearable } from '../../stores/CurrentDropStore';
 import ReactLoaderSpinner from 'react-loader-spinner'
 
 interface IProps {
@@ -71,12 +70,6 @@ justify-content: flex-start;
 const columns = [
     { title: 'ID', dataIndex: 'id', key: 'id' },
     { title: 'Number of things', dataIndex: 'numberOfThings', key: 'numberOfThings' },
-    // {
-    //     title: 'Action',
-    //     dataIndex: '',
-    //     key: 'x',
-    //     render: () => <a>Delete</a>,
-    // },
 ];
 const dropInfoColumns = [
     { title: 'ID', dataIndex: 'id', key: 'id', },

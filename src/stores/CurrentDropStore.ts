@@ -1,4 +1,3 @@
-import { RootStore } from "./index";
 import { SubStore } from "./SubStore";
 import { action, observable, autorun } from "mobx";
 
@@ -20,7 +19,7 @@ export class CurrentDropStore extends SubStore {
 
   @observable currentWearId: string = ''
   @action setCurrentWearId = (id: string) => this.currentWearId = id
-  
+
   autoUpdate = autorun(() => {
     localStorage.setItem("currentDrop", JSON.stringify(this.currentDrop));
   });

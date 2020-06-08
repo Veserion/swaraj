@@ -15,12 +15,7 @@ type IWearable = {
 };
 
 export class DataStore extends SubStore {
-  // @observable drops: Record<string, Record<string, IWearable>> = {};
-  @observable drops: {
-    [dropKey: string]: {
-      [wearKey: string]: IWearable;
-    };
-  } = {};
+  @observable drops: Record<string, Record<string, IWearable>> = {};
 
   constructor(rootStore: RootStore, initState: any) {
     super(rootStore);
