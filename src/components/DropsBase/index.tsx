@@ -36,7 +36,7 @@ export default class DropsBase extends React.Component<IProps> {
                                 columns={dropInfoColumns}
                                 dataSource={Object.entries(drops[record.id] || {}).map(([id, v]) => ({ ...v, id, key: id }))}
                             />,
-                            rowExpandable: record => record.dropInfo.length !== 0,
+                            rowExpandable: record => !record.dropInfo,
                         }}
                         dataSource={data}
                     />
