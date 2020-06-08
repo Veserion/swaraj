@@ -1,14 +1,20 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Table } from 'antd'
+import { Table, Button, Space } from 'antd'
 import { CurrentDropStore, IWearable } from '../../stores/CurrentDropStore'
 import { inject, observer } from 'mobx-react'
+import { DataStore } from '../../stores/DataStore'
+import { FormInstance } from 'antd/lib/form'
+// import { access } from 'fs'
+// import { values } from 'mobx'
 
 interface IProps {
     currentDropStore?: CurrentDropStore
+    dataStore?: DataStore
+    formRef: React.RefObject<FormInstance>
 }
 
-@inject('currentDropStore')
+@inject('currentDropStore', 'dataStore')
 @observer
 export default class TableCurrentDrop extends React.Component<IProps> {
     render() {
@@ -46,8 +52,8 @@ export default class TableCurrentDrop extends React.Component<IProps> {
             },
             {
                 title: 'Release price',
-                dataIndex: 'releasePrice',
-                key: 'releasePrice',
+                dataIndex: 'price',
+                key: 'price',
             },
             {
                 title: 'Description',
@@ -59,11 +65,52 @@ export default class TableCurrentDrop extends React.Component<IProps> {
                 dataIndex: 'picture',
                 key: 'picture',
             },
+            {
+                title: 'Action',
+                key: 'action',
+                render: (text: string, record: IWearable) => (
+                    <Space size="middle">
+                        <a onClick={() => this.props.currentDropStore?.deleteWear(record.id)}>
+                            Delete
+                        </a>
+                        <a onClick={() => {
+                            this.props.formRef.current!.setFieldsValue(
+                                this.props.currentDropStore?.currentDrop!.find(item => item.id === record.id)!
+                            )
+                            this.props.currentDropStore?.setCurrentWearId(record.id)
+                        }}>
+                            Change
+                        </a>
+                    </Space>
+                ),
+            },
         ];
         return <Root>
             <Table dataSource={dataSource} columns={columns} />
+            <ButtonPush onClick={() => {
+                this.props.dataStore?.
+                    addDrop(this.props.currentDropStore?.currentDrop!.
+                        reduce((acc, value) => ({ ...acc, [value.id]: value }), {}))
+                this.props.currentDropStore?.clear()
+            }}>
+                Push Drop
+            </ButtonPush>
         </Root>
     }
 }
 
 const Root = styled.div``
+
+const ButtonPush = styled.span`
+display: flex;
+justify-content: center;
+align-items: center;
+width: auto;
+background: #1890FF;
+border: none;
+color: white;
+padding: 7px 15px;
+border-radius: 2px;
+cursor: pointer;
+`
+

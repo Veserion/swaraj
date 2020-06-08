@@ -20,6 +20,7 @@
     "mobx-react": "^6.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-loader-spinner": "^3.1.14",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5"
   },
@@ -45,6 +46,11 @@
     ]
   },
   "devDependencies": {
-    "@types/firebase": "^3.2.1"
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@types/firebase": "^3.2.1",
+    "@types/react-loader-spinner": "^3.1.0"
   }
 }

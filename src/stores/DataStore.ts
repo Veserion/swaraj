@@ -15,7 +15,12 @@ type IWearable = {
 };
 
 export class DataStore extends SubStore {
-  @observable drops: Record<string, Record<string, IWearable>> = {};
+  // @observable drops: Record<string, Record<string, IWearable>> = {};
+  @observable drops: {
+    [dropKey: string]: {
+      [wearKey: string]: IWearable;
+    };
+  } = {};
 
   constructor(rootStore: RootStore, initState: any) {
     super(rootStore);
@@ -28,11 +33,11 @@ export class DataStore extends SubStore {
       .once("value")
       .then((snapshot) => {
         const drops = snapshot.val();
-        this.drops = drops;
+        this.drops = drops || {};
       });
   };
 
-  addItem = async (drop: IWearable) =>
+  addDrop = async (drop: Record<string, IWearable>) =>
     new Promise(async (resolve) => {
       database.ref("/").push(drop, (error) => resolve(error));
       await this.syncGoods();

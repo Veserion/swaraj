@@ -6,6 +6,7 @@ import FormBody from "./FormBody";
 import TableCurrentDrop from "./TableCurrentDrop"
 import { inject, observer } from 'mobx-react';
 import { SwitchScreenStore } from '../../stores'
+import { FormInstance } from 'antd/lib/form';
 
 interface IProps {
     switchScreenStore?: SwitchScreenStore
@@ -14,11 +15,11 @@ interface IProps {
 @inject('switchScreenStore')
 @observer
 export default class CurrentDrop extends React.Component<IProps> {
-    // handleCancel = () => this.setState({ visible: false });
+    formRef = React.createRef<FormInstance>();
 
+    
     handleSubmit = (values: any) => {
         console.log(values);
-
     }
 
     render() {
@@ -30,8 +31,8 @@ export default class CurrentDrop extends React.Component<IProps> {
         return <Root>
             <Wrapper className={classHidden}>
                 {console.log(this.props.switchScreenStore!.openScreen)}
-                <TableCurrentDrop css={css`flex: 1;`} />
-                <FormBody css={css`flex: 1;`} />
+                <TableCurrentDrop formRef={this.formRef} css={css`flex: 1;`} />
+                <FormBody formRef={this.formRef} css={css`flex: 1;`} />
             </Wrapper>
         </Root>
     }

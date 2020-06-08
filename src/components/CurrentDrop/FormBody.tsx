@@ -28,16 +28,17 @@ align-items: center;
 
 interface IProps {
     currentDropStore?: CurrentDropStore
-    // onSubmit: (values: any) => void
+    formRef: React.RefObject<FormInstance>
+}
+interface IState {
+    currentWearID: string
 }
 
 @inject('currentDropStore')
 @observer
 export default class FormBody extends React.Component<IProps> {
-    formRef = React.createRef<FormInstance>();
-
     onFill = () => {
-        this.formRef.current!.setFieldsValue({
+        this.props.formRef.current!.setFieldsValue({
             article: 'test data',
             quantityIssued: 2,
             materials: 'test data',
@@ -50,13 +51,14 @@ export default class FormBody extends React.Component<IProps> {
 
     onSubmit = (wear: IWearable) => {
         this.props.currentDropStore?.addWear(wear)
+        this.props.formRef.current!.resetFields()
     }
 
     render() {
         return (
             <Root>
-                <Form {...layout} ref={this.formRef} name="control-ref"
-                    onFinish={values => this.onSubmit({ ...values, id: generId(values as IWearable).toString() } as IWearable)}>
+                <Form {...layout} ref={this.props.formRef} name="control-ref"
+                    onFinish={values => this.onSubmit({ ...values, id: this.props.currentDropStore?.currentWearId } as IWearable)}>
                     <Form.Item name="article" label="Article" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
@@ -93,7 +95,6 @@ export default class FormBody extends React.Component<IProps> {
     }
 }
 
-const generId = (wear: IWearable) => {
-    console.log(wear.quantityIssued, wear.price, wear.article.length, wear.description.length)
-    return Math.ceil(wear.quantityIssued * wear.price * wear.article.length + wear.description.length)
+const generId = () => {
+    return Math.ceil(10000 * Math.random())
 }

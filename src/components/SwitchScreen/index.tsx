@@ -23,7 +23,7 @@ export default class SwitchScreen extends React.Component<IProps> {
         return <Root>
             <Wrapper className={classSwitch}>
                 <Drops onClick={() => this.handleSwitch('Drops')}>Drops Base</Drops>
-                <PushDrop onClick={() => this.handleSwitch('CurrentDrop')}>Push Drop</PushDrop>
+                <PushDrop onClick={() => this.handleSwitch('CurrentDrop')}>Current Drop</PushDrop>
             </Wrapper>
         </Root>
     }
@@ -35,14 +35,14 @@ top: 50px;
 left: 50px;
 display: flex;
 .drops{
-    >div:nth-child(1){
+    >div:first-child{
         background: #1890FF;
         border: none;
         color: white;
     }
 }
 .currentDrop{
-    >div:nth-child(2){
+    >div:last-child{
         background: #1890FF;
         border: none;
         color: white;
