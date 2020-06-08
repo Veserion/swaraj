@@ -28,11 +28,11 @@ export class DataStore extends SubStore {
       .once("value")
       .then((snapshot) => {
         const drops = snapshot.val();
-        this.drops = drops;
+        this.drops = drops || {};
       });
   };
 
-  addItem = async (drop: IWearable) =>
+  addDrop = async (drop: Record<string, IWearable>) =>
     new Promise(async (resolve) => {
       database.ref("/").push(drop, (error) => resolve(error));
       await this.syncGoods();

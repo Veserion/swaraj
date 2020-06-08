@@ -1,16 +1,16 @@
-import { DataStore, CurrentDropsStore, SwitchScreenStore } from "./index";
+import { DataStore, CurrentDropStore, SwitchScreenStore } from "./index";
 
 class RootStore {
   public dataStore: DataStore;
-  public currentDropsStore: CurrentDropsStore;
+  public currentDropStore: CurrentDropStore;
   public switchScreenStore: SwitchScreenStore;
-  
+
   constructor(initState: any) {
     this.dataStore = new DataStore(
       this,
       initState && initState.dataStore ? initState.dataStore : null
     );
-    this.currentDropsStore = new CurrentDropsStore(this);
+    this.currentDropStore = new CurrentDropStore(this);
     this.switchScreenStore = new SwitchScreenStore(this);
   }
 
