@@ -52,6 +52,7 @@ const Loader = () => <div css={css` margin: 17% auto; `}>
 
 const Root = styled.div`
 width: 100%;
+margin-top: 50px;
 margin-left: 100px;
 .hidden {
     display: none;

@@ -42,7 +42,7 @@ export default class CurrentDrop extends React.Component<IProps> {
 
 const Root = styled.div`
 width: 100%;
-margin-top: 120px;
+margin-top: 80px;
 margin-left: 100px;
 .hidden {
     display: none;

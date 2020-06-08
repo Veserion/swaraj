@@ -31,7 +31,7 @@ export default class SwitchScreen extends React.Component<IProps> {
 
 const Root = styled.div`
 position: absolute;
-top: 50px;
+top: 20px;
 left: 50px;
 display: flex;
 .drops{
